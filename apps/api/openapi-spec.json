@@ -1,0 +1,115 @@
+{
+	"openapi": "3.1.0",
+	"paths": {
+		"/v1/users": {
+			"post": {
+				"operationId": "CreateUserController_createUser_v1",
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string",
+										"format": "email"
+									}
+								},
+								"required": [
+									"email"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"format": "uuid"
+										},
+										"email": {
+											"type": "string",
+											"format": "email"
+										}
+									},
+									"required": [
+										"id",
+										"email"
+									]
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "An unexpected error occured.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"status": {
+											"type": "number",
+											"enum": [
+												500
+											]
+										},
+										"messages": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"code": {
+														"type": "string",
+														"enum": [
+															"http/internal-server-error"
+														]
+													},
+													"message": {
+														"type": "string"
+													}
+												},
+												"required": [
+													"code",
+													"message"
+												]
+											}
+										}
+									},
+									"required": [
+										"status",
+										"messages"
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CreateUser",
+					"v1"
+				]
+			}
+		}
+	},
+	"info": {
+		"title": "API",
+		"description": "",
+		"version": "v1",
+		"contact": {}
+	},
+	"tags": [],
+	"servers": [],
+	"components": {
+		"schemas": {}
+	}
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@template-repo/local",
+  "scripts": {
+    "start": "docker compose -f docker-compose.yml --project-name template-repo up"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@template-repo/api-client",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json",
+    "watch": "node ."
+  },
+  "dependencies": {
+    "openapi-typescript-fetch": "^2.2.1"
+  }
+}

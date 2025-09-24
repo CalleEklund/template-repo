@@ -1,0 +1,9 @@
+{
+  "name": "@template-repo/api-client-generator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "watch": "node ."
+  }
+}

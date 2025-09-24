@@ -1,4 +1,25 @@
 {
-  "name": "template-repo",
-  "packageManager": "yarn@4.9.2"
+  "name": "@template-repo/root",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "infrastructure/**/*"
+  ],
+  "scripts": {
+    "dev:api": "yarn workspace api start:dev",
+    "dev:web": "yarn workspace web dev",
+    "api:watch": "yarn workspace api-client-generator watch"
+  },
+  "packageManager": "yarn@3.2.4",
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "vite-plugin-checker": "^0.10.3"
+  }
 }

@@ -1,0 +1,7 @@
+{
+  "extends": "@template-repo/typescript/tsconfig.package.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+  },
+  "include": ["./src"]
+}
