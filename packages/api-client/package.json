@@ -4,8 +4,10 @@
   "types": "dist/src/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "npx tsc --project tsconfig.json",
-    "watch": "node ."
+    "build": "npx tsc --project tsconfig.json"
+  },
+  "devDependencies": {
+    "@template-repo/typescript": "workspace:^"
   },
   "dependencies": {
     "openapi-typescript-fetch": "^2.2.1"

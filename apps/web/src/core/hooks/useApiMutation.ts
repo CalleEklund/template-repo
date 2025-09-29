@@ -1,9 +1,9 @@
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { useApiClient } from './useApiClient';
+import { useApiClient } from "./useApiClient";
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
 type ApiMutationFn<TData = unknown, TVariables = unknown> = (
   client: ReturnType<typeof useApiClient>,
-  variables: TVariables
+  variables: TVariables,
 ) => Promise<TData>;
 
 export const useApiMutation = <
@@ -14,13 +14,13 @@ export const useApiMutation = <
 >(
   options: Omit<
     UseMutationOptions<TData, TError, TVariables, TContext>,
-    'mutationFn'
-  > & { mutationFn: ApiMutationFn<TData, TVariables> }
+    "mutationFn"
+  > & { mutationFn: ApiMutationFn<TData, TVariables> },
 ) => {
   const client = useApiClient();
 
   return useMutation<TData, TError, TVariables, TContext>({
     ...options,
-    mutationFn: variables => options.mutationFn(client, variables),
+    mutationFn: (variables) => options.mutationFn(client, variables),
   });
 };

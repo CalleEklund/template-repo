@@ -1,115 +1,159 @@
 {
-	"openapi": "3.1.0",
-	"paths": {
-		"/v1/users": {
-			"post": {
-				"operationId": "CreateUserController_createUser_v1",
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"description": "",
-					"content": {
-						"application/json": {
-							"schema": {
-								"type": "object",
-								"properties": {
-									"email": {
-										"type": "string",
-										"format": "email"
-									}
-								},
-								"required": [
-									"email"
-								]
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"id": {
-											"type": "string",
-											"format": "uuid"
-										},
-										"email": {
-											"type": "string",
-											"format": "email"
-										}
-									},
-									"required": [
-										"id",
-										"email"
-									]
-								}
-							}
-						}
-					},
-					"500": {
-						"description": "An unexpected error occured.",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"status": {
-											"type": "number",
-											"enum": [
-												500
-											]
-										},
-										"messages": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"code": {
-														"type": "string",
-														"enum": [
-															"http/internal-server-error"
-														]
-													},
-													"message": {
-														"type": "string"
-													}
-												},
-												"required": [
-													"code",
-													"message"
-												]
-											}
-										}
-									},
-									"required": [
-										"status",
-										"messages"
-									]
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"CreateUser",
-					"v1"
-				]
-			}
-		}
-	},
-	"info": {
-		"title": "API",
-		"description": "",
-		"version": "v1",
-		"contact": {}
-	},
-	"tags": [],
-	"servers": [],
-	"components": {
-		"schemas": {}
-	}
+  "openapi": "3.1.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_handler",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": ["ok"]
+                    }
+                  },
+                  "required": ["status"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "enum": [500]
+                    },
+                    "error_code": {
+                      "type": "string",
+                      "enum": ["INTERNAL_SERVER_ERROR"]
+                    },
+                    "error_message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["status_code", "error_code", "error_message"]
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get health status of application",
+        "tags": ["Application"]
+      }
+    },
+    "/v1/user/register": {
+      "post": {
+        "operationId": "UserRegisterController_handler_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                },
+                "required": ["username", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "username": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 30
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["id", "username", "email", "createdAt"]
+                    }
+                  },
+                  "required": ["user"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "enum": [500]
+                    },
+                    "error_code": {
+                      "type": "string",
+                      "enum": ["INTERNAL_SERVER_ERROR"]
+                    },
+                    "error_message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["status_code", "error_code", "error_message"]
+                }
+              }
+            }
+          }
+        },
+        "summary": "Register a new user",
+        "tags": ["User"]
+      }
+    }
+  },
+  "info": {
+    "title": "API",
+    "description": "",
+    "version": "v1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {}
+  }
 }

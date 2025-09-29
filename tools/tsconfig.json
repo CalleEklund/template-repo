@@ -1,0 +1,13 @@
+{
+  "extends": "@template-repo/typescript/tsconfig.package.json",
+  "compilerOptions": {
+    "outDir": "dist/scripts",
+    "module": "CommonJS",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "emitDeclarationOnly": false,
+    "noEmit": false,
+    "rootDir": "./scripts"
+  },
+  "include": ["./scripts/**/*.ts"]
+}

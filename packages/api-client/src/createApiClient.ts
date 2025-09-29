@@ -1,19 +1,13 @@
-import { Fetcher, FetchReturnType, Middleware } from 'openapi-typescript-fetch';
-import { paths } from './types.js';
+import { paths } from "./types";
+import { Fetcher, FetchReturnType } from "openapi-typescript-fetch";
 
-export const createApiClient = (url: string, middleware?: Middleware[]) => {
+export const createApiClient = (baseUrl: string) => {
   const client = Fetcher.for<paths>();
-  client.configure({
-    baseUrl: url,
-    init: {
-      credentials: 'include',
-    },
-    use: middleware,
-  });
+  client.configure({ baseUrl });
 
   return {
-    test: {
-      helloWorld: client.path('/v1/users').method('post').create(),
+    user: {
+      register: client.path("/v1/user/register").method("post").create(),
     },
   };
 };

@@ -1,0 +1,1 @@
+export { UserRegisterService } from "./UserRegisterService";

@@ -1,23 +1,13 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": "@template-repo/typescript/tsconfig.base.json",
   "compilerOptions": {
-    "strict": true,
-    "module": "nodenext",
+    "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    
-   "resolvePackageJsonExports": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "declaration": true,
-    "removeComments": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
-  }
+    "paths": {
+      "~/*": ["./*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["dist"]
 }

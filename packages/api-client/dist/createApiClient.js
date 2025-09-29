@@ -1,16 +1,11 @@
-import { Fetcher } from 'openapi-typescript-fetch';
-export const createApiClient = (url, middleware) => {
+import { Fetcher } from "openapi-typescript-fetch";
+export const createApiClient = (baseUrl) => {
     const client = Fetcher.for();
-    client.configure({
-        baseUrl: url,
-        init: {
-            credentials: 'include',
-        },
-        use: middleware,
-    });
+    client.configure({ baseUrl });
     return {
-        test: {
-            helloWorld: client.path('/v1/helloWorld').method('get').create(),
+        user: {
+            register: client.path("/v1/user/register").method("post").create(),
         },
     };
 };
+//# sourceMappingURL=createApiClient.js.map

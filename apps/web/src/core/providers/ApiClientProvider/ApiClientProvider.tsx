@@ -1,6 +1,7 @@
-import { createContext, FC, ReactNode } from 'react';
-import { z } from 'zod';
-import { createApiClient } from '@template-repo/api-client';
+/* eslint-disable react-refresh/only-export-components */
+import { createApiClient } from "@template-repo/api-client/src/index";
+import { createContext, FC, ReactNode } from "react";
+import { z } from "zod";
 
 const ApplicationConfigurationSchema = z.object({
   api: z.object({
@@ -11,12 +12,12 @@ const ApplicationConfigurationSchema = z.object({
 export const configuration = (() => {
   return ApplicationConfigurationSchema.parse({
     api: {
-      url: import.meta.env.VITE_API_URL,
+      url: import.meta.env["VITE_API_URL"],
     },
   });
 })();
 
-const client = createApiClient(configuration.api.url, []);
+const client = createApiClient(configuration.api.url);
 
 export const ApiClientContext = createContext(client);
 

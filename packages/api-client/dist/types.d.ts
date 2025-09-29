@@ -3,16 +3,34 @@
  * Do not make direct changes to the file.
  */
 export interface paths {
-    "/v1/helloWorld": {
+    "/health": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["AppController_getHello_v1"];
+        /** Get health status of application */
+        get: operations["HealthController_handler"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/user/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register a new user */
+        post: operations["UserRegisterController_handler_v1"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,12 +49,9 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AppController_getHello_v1: {
+    HealthController_handler: {
         parameters: {
-            query: {
-                calle: string;
-                tjena: number;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -49,7 +64,8 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        age: number;
+                        /** @enum {string} */
+                        status: "ok";
                     };
                 };
             };
@@ -61,15 +77,65 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @enum {number} */
-                        status: 500;
-                        messages: {
-                            /** @enum {string} */
-                            code: "http/internal-server-error";
-                            message: string;
-                        }[];
+                        status_code: 500;
+                        /** @enum {string} */
+                        error_code: "INTERNAL_SERVER_ERROR";
+                        error_message: string;
+                    };
+                };
+            };
+        };
+    };
+    UserRegisterController_handler_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    username: string;
+                    /** Format: email */
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        user: {
+                            /** Format: uuid */
+                            id: string;
+                            username: string;
+                            /** Format: email */
+                            email: string;
+                            createdAt: string;
+                        };
+                    };
+                };
+            };
+            /** @description An unexpected error occured. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {number} */
+                        status_code: 500;
+                        /** @enum {string} */
+                        error_code: "INTERNAL_SERVER_ERROR";
+                        error_message: string;
                     };
                 };
             };
         };
     };
 }
+//# sourceMappingURL=types.d.ts.map

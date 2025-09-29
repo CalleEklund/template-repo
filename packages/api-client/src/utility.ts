@@ -1,4 +1,4 @@
-import { paths } from './types';
+import { paths } from "./types";
 
 // =========================
 // 1. PARAMETER EXTRACTION
@@ -15,14 +15,14 @@ type ExtractQueryParams<T> = T extends { parameters: { query?: infer Q } }
   : never;
 
 type ExtractRequestBody<T> = T extends {
-  requestBody: { content: { 'application/json': infer R } };
+  requestBody: { content: { "application/json": infer R } };
 }
   ? R
   : never;
 
 // Helper to extract successful responses (200, 201, etc.)
 type ExtractSuccessResponse<T, Status extends number> = T extends {
-  responses: Record<Status, { content: { 'application/json': infer R } }>;
+  responses: Record<Status, { content: { "application/json": infer R } }>;
 }
   ? R
   : never;
@@ -33,19 +33,19 @@ type ExtractSuccessResponse<T, Status extends number> = T extends {
 // For PATH parameters (non-undefined)
 export type ClientPathParams<
   P extends keyof paths,
-  M extends keyof paths[P] = 'get',
+  M extends keyof paths[P] = "get",
 > = NonNullable<ExtractPathParams<paths[P][M]>>;
 
 // For QUERY parameters (non-undefined)
 export type ClientQueryParams<
   P extends keyof paths,
-  M extends keyof paths[P] = 'get',
+  M extends keyof paths[P] = "get",
 > = NonNullable<ExtractQueryParams<paths[P][M]>>;
 
 // For REQUEST BODY (non-undefined)
 export type ClientRequestBody<
   P extends keyof paths,
-  M extends keyof paths[P] = 'post',
+  M extends keyof paths[P] = "post",
 > = NonNullable<ExtractRequestBody<paths[P][M]>>;
 
 // Path-specific response union (for all methods with success responses)

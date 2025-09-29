@@ -1,9 +1,0 @@
-server:
-  port: 9000
-  host: 'http://localhost:9000'
-  corsOrigins:
-    - http://localhost:3000
-postgres:
-  connectionUri: postgresql://user:password@localhost:5432/template-repo
-  migrationDirectory: migrations
-  migrate: true

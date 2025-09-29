@@ -1,6 +1,6 @@
 {
- "extends": "@template-repo/typescript/tsconfig.base",
- "compilerOptions": {
+  "extends": "@template-repo/typescript/tsconfig.base",
+  "compilerOptions": {
     "noEmit": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"]

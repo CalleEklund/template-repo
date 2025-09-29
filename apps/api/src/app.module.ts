@@ -1,36 +1,24 @@
-import { Module } from '@nestjs/common';
-import { ConfigurationModule, ConfigurationService } from './configuration';
-import { BorderPatrolModule } from '@qte/nest-border-patrol';
-import { I18nModule } from './i18n/i18n.module';
-import { PostgresModule } from './postgres';
-import { HealthModule } from './health';
-import { UserModule } from './user';
+import { ApiModule } from "./api";
+import { UserModule } from "./contexts/user";
+import {
+  ConfigurationModule,
+  ConfigurationService,
+} from "./platform/configuration";
+import { PostgresModule } from "./platform/postgres";
+import { Module } from "@nestjs/common";
 
 @Module({
   imports: [
-    I18nModule,
-    BorderPatrolModule.forRootAsync({
-      useFactory: () => ({
-        useDefaultFilter: false,
+    ConfigurationModule,
+    PostgresModule.forRootAsync({
+      inject: [ConfigurationService],
+      useFactory: (configurationService: ConfigurationService) => ({
+        connectionUri: configurationService.get().postgres.uri,
       }),
     }),
-    ConfigurationModule.forRootAsync({
-      configurationFilePath: __dirname + '/../configuration/configuration.yml',
-    }),
-    PostgresModule.forRootAsync({
-      imports: [ConfigurationModule],
-      inject: [ConfigurationService],
-      useFactory: (configurationService: ConfigurationService) => {
-        const { connectionUri, migrate, migrationDirectory } =
-          configurationService.get().postgres;
-        return {
-          postgres: { connectionUri },
-          migrationDirectory: `${__dirname}/../${migrationDirectory}`,
-          migrate,
-        };
-      },
-    }),
-    HealthModule,
+
+    //Context Modules
+    ApiModule,
     UserModule,
   ],
 })

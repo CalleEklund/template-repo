@@ -1,15 +1,13 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
-
-import { routeTree } from './routeTree.gen';
-import { QueryClientProvider } from './core/providers/QueryClientProvider';
-import { ApiClientProvider } from './core/providers/ApiClientProvider';
+import { i18n } from "./core/i18n";
+import { ApiClientProvider } from "./core/providers/ApiClientProvider";
+import { QueryClientProvider } from "./core/providers/QueryClientProvider";
+import { routeTree } from "./routeTree.gen";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { I18nextProvider } from "react-i18next";
 
 const router = createRouter({ routeTree });
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
@@ -19,7 +17,9 @@ export const App = () => {
   return (
     <ApiClientProvider>
       <QueryClientProvider>
-        <RouterProvider router={router} />
+        <I18nextProvider i18n={i18n}>
+          <RouterProvider router={router} />
+        </I18nextProvider>
       </QueryClientProvider>
     </ApiClientProvider>
   );

@@ -1,0 +1,14 @@
+.git
+.nx
+docs
+infrastructure
+node_modules
+
+.editorconfig
+.gitattributes
+.gitignore
+.nvmrc
+.prettierignore
+.prettierrc.yaml
+README.md
+eslint.config.mjs

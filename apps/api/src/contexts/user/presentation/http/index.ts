@@ -1,0 +1,1 @@
+export { UserRegisterController } from "./UserRegisterController";

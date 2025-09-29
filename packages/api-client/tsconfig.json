@@ -1,7 +1,21 @@
 {
-  "extends": "@template-repo/typescript/tsconfig.package.json",
+  "extends": "@template-repo/typescript/tsconfig.base.json",
+  "types": "./dist/index.ts",
   "compilerOptions": {
+    "baseUrl": "./",
+    "target": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
+    "emitDeclarationOnly": false,
+    "module": "esnext",
+    "moduleResolution": "node"
   },
-  "include": ["./src"]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

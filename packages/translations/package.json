@@ -1,0 +1,12 @@
+{
+  "name": "@template-repo/translations",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@template-repo/typescript": "workspace:^",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.2.1"
+  }
+}
