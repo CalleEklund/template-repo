@@ -1,6 +1,6 @@
+import { PostgresUserRepository } from "../PostgresUserRepository";
 import { User } from "~/contexts/user/domain/entities";
 import { createPostgresTestingPool } from "~/platform/postgres/__test__";
-import { PostgresUserRepository } from "../PostgresUserRepository";
 
 describe("PostgresUserRepository", () => {
   let repository: PostgresUserRepository;
