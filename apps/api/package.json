@@ -10,6 +10,7 @@
     "start:dev": "tsc-watch --project tsconfig.build.json --onSuccess \"pnpm start\"",
     "build": "tsc --project tsconfig.build.json && resolve-tspaths",
     "build:dependencies": "pnpm nx build",
+    "test": "pnpm build:dependencies && dotenvx run -f .env.testing -- jest",
     "migrate": "atlas schema apply --dev-url \"docker://postgres/17/schema\"  -u \"postgres://postgres:password@localhost:5432/template-repo?sslmode=disable\" --to file://schema.sql",
     "api:generate": "pnpm openapi-typescript ./openapi-spec.json -o ../../packages/api-client/src/types.ts",
     "typecheck": "tsc --project tsconfig.json",

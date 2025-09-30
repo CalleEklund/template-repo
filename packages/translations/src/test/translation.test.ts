@@ -1,15 +1,18 @@
-import { expect } from "@jest/globals";
-import { describe, it } from "@jest/globals";
+import { describe, it, expect } from "@jest/globals";
 import fs from "fs";
 import path from "path";
 
-const locales = path.join(__dirname, "../src/resources");
+const locales = path.join(__dirname, "../resources");
 const languages = fs.readdirSync(locales);
 
-const getFlatKeys = (obj, prefix = "") =>
+interface FlatObject {
+  [key: string]: string | FlatObject;
+}
+
+const getFlatKeys = (obj: FlatObject, prefix: string = ""): string[] =>
   Object.entries(obj).flatMap(([key, val]) =>
     typeof val === "object"
-      ? getFlatKeys(val, `${prefix}${key}.`)
+      ? getFlatKeys(val as FlatObject, `${prefix}${key}.`)
       : `${prefix}${key}`,
   );
 
@@ -25,11 +28,14 @@ describe("i18n resources check", () => {
 });
 
 describe("i18n key consistency", () => {
+  if (!languages[0]) {
+    throw new Error("No languages found in locales directory");
+  }
   const namespaces = fs.readdirSync(path.join(locales, languages[0]));
 
   namespaces.forEach((namespace) => {
     it(`should have matching keys in all languages for namespace "${namespace}"`, () => {
-      const keysByLang = {};
+      const keysByLang: { [language: string]: Set<string> } = {};
 
       languages.forEach((language) => {
         const filePath = path.join(locales, language, namespace);
@@ -38,15 +44,18 @@ describe("i18n key consistency", () => {
       });
 
       const baseLang = languages[0];
-      const baseKeys = keysByLang[baseLang];
+      if (!baseLang || !(baseLang in keysByLang)) {
+        throw new Error(
+          "Base language is undefined or not found in keysByLang",
+        );
+      }
+      const baseKeys = keysByLang[baseLang] ?? new Set<string>();
 
       for (const lang of languages) {
-        //find missing keys
         const missingInLang = [...baseKeys].filter(
-          (k) => !keysByLang[lang].has(k),
+          (k) => !(keysByLang[lang] ?? new Set()).has(k),
         );
-        //find exessive keys
-        const extraInLang = [...keysByLang[lang]].filter(
+        const extraInLang = [...(keysByLang[lang] ?? new Set())].filter(
           (k) => !baseKeys.has(k),
         );
 

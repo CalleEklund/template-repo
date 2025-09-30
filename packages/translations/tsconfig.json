@@ -3,11 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.json",
-    "src/test/translation.test.js"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "jest.config.ts", "src/test/translation.test.js"],
   "exclude": ["node_modules"]
 }

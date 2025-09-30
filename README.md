@@ -12,14 +12,15 @@ DONE:
 - add check translation script
 - fix prettier and eslint configs
 - standardize scripts
+- cleanup package.json:s
 
 DOING:
+- setup testing
+- add simple CI
 
 Wishlist:
-
-- add simple CI
+- add zod4 (update border patrol)
 - Update readme
-- cleanup package.json:s
 - dtomapper interface
 
 - cant test translation package
