@@ -17,9 +17,11 @@ DONE:
 - add simple CI
 
 DOING:
+
 - add zod4 (update border patrol)
 
 Wishlist:
+
 - Update readme
 - dtomapper interface
 

@@ -1,8 +1,14 @@
 {
   "extends": "@template-repo/typescript/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json", "jest.config.ts", "src/test/translation.test.js"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.json",
+    "jest.config.ts",
+    "src/test/translation.test.js"
+  ],
   "exclude": ["node_modules"]
 }
