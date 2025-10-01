@@ -13,13 +13,13 @@ DONE:
 - fix prettier and eslint configs
 - standardize scripts
 - cleanup package.json:s
-
-DOING:
 - setup testing
 - add simple CI
 
-Wishlist:
+DOING:
 - add zod4 (update border patrol)
+
+Wishlist:
 - Update readme
 - dtomapper interface
 
