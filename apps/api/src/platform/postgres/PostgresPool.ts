@@ -1,13 +1,6 @@
 import { Logger } from "@nestjs/common";
-import {
-  ClientConfiguration,
-  createPool,
-  createTypeParserPreset,
-  DatabasePool,
-  type Interceptor,
-  type QueryResultRow,
-  SchemaValidationError,
-} from "slonik";
+import { ClientConfiguration, createPool, createTypeParserPreset, DatabasePool, type Interceptor, type QueryResultRow, SchemaValidationError } from "slonik";
+
 
 const createResultParserInterceptor = (logger: Logger): Interceptor => {
   return {
@@ -44,7 +37,7 @@ const createResultParserInterceptor = (logger: Logger): Interceptor => {
 
 export type PostgresPool = DatabasePool;
 
-export const PostgresPool = Symbol("@dhl/PostgresPool");
+export const PostgresPool = Symbol("@template-repo/PostgresPool");
 
 export const createPostgresPool = async (
   connectionUri: string,

@@ -32,9 +32,9 @@ import { PostgreSqlContainer } from "@testcontainers/postgresql";
 
 export const setupPostgresContainer = async () => {
   const container = await new PostgreSqlContainer("postgres:17.3-alpine")
-    .withUsername("dhl")
+    .withUsername("template-repo")
     .withPassword("password")
-    .withDatabase("dhl")
+    .withDatabase("template-repo")
     .withCopyFilesToContainer([
       {
         source: __dirname + "/../../../../schema.sql",
